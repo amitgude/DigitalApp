@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
 
-  resources :users , except: [:destroy, :show] do
+  resources :users , except: [:destroy, :show, :create] do
     member do
       get :follow
       get :Unfollow

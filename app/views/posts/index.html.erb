@@ -1,25 +1,26 @@
+
  <div class="row">
  <% @posts.each do |post| %>
-      <div class="col s12 m6 l4">
-        <div class="card small">
-          <div class="card-image">
-            <%= image_tag post.image.url(:thumb) %>
-            <span class="card-title"><%= post.title %></span>
-          </div>
-          <div class="card-content">
-            <%= post.description %> <br>
-            <%= link_to post.user.email, profile_user_path(post.user.id) %> <br>
-            <div class="like">
-             <i class="tiny material-icons">thumb_up</i><%= post.get_upvotes.size %>
-           </div>
-           <div class="dislike">
-             <i class="tiny material-icons">thumb_down</i><%= post.get_downvotes.size %>
-           </div>
-          </div>
-          <div class="card-action">
-            <%= link_to 'Show', post %>
-          </div>
-        </div>
+ <div class="col s12 m6 l4">
+   <div class="card small">
+     <div class="card-image">
+       <%= image_tag post.image.url %>
+       <span class="card-title"><%= post.title %></span>
+     </div>
+     <div class="card-content">
+       <%= post.description %> <br>
+       <%= link_to post.user.email, profile_user_path(post.user.id) %> <br>
+       <div class="like">
+        <i class="tiny material-icons">thumb_up</i><%= post.get_upvotes.size %>
       </div>
+      <div class="dislike">
+        <i class="tiny material-icons">thumb_down</i><%= post.get_downvotes.size %>
+      </div>
+     </div>
+     <div class="card-action">
+       <%= link_to 'Show', post %>
+     </div>
+   </div>
+ </div>
 <% end %>
 </div>

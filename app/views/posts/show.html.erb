@@ -1,26 +1,33 @@
-<p id="notice"><%= notice %></p>
-
-<div class="col">
-  <div class="Avatar l8 s12">
-    <%=image_tag @post.image.url(:medium) %>
-  </div>
-  <div class="like l2">
-    <%= link_to "Like", like_post_path(@post), method: :put %>
-  </div>
-
-  <div class="dislike l2">
-    <%= link_to "Dislike", dislike_post_path(@post), method: :put %> <br>
+<div class="row">
+  <div class="Avatar col l8 s12">
+    <%=image_tag(@post.image.url(:medium)) %>
   </div>
 </div>
 
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path %>
-<br>
+<div class ="row">
+ <div class="col l1">
+ <i class="tiny material-icons">thumb_up</i><%= @post.get_upvotes.size %>
+ </div>
+
+ <div class="col l1">
+ <i class="tiny material-icons">thumb_down</i><%= @post.get_downvotes.size %>
+ </div>
+
+</div>
+<div  class="row">
+    <div class="dislike col l2">
+      <%= link_to "Dislike", dislike_post_path(@post), method: :put, :class => "btn red" %> <br>
+    </div>
+    <div class="like col l2">
+      <%= link_to "Like", like_post_path(@post), method: :put, :class => "btn green" %>
+    </div>
+  <div class="col l2" style="float:right">
+    <%= link_to 'Edit', edit_post_path(@post), :class => "btn" %>
+  </div>
+</div>
 
 
-<%= @post.get_upvotes.size %>
-<div id="comment">
-
+<div class="row">
 <% @comments.each do |comment| %>
 
   User: <%= comment.user.email %> <br>

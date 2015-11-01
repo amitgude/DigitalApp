@@ -1,8 +1,68 @@
-<%= @user.email %>
+<div class="container">
+   <div class="row">
+      <div class="col l6">
+        <%= image_tag(@user.avatar.url(:medium), :class => "circle responsive-img") %>
+     </div>
+     <div class="col l6">
+      <div>
+        <%=@username %>
+      </div>
 
-<% if current_user.following?(@user) %>
- <%= link_to "Unfollow", Unfollow_user_path(@user) %>
+      <div>
+        <%= @user.email %>
+      </div>
 
-<% else %>
-<%= link_to "follow",follow_user_path(@user) %>
-<% end %>
+
+      <div>
+         Total Posts: <%= @user.posts.size %>
+      </div>
+
+      <div>
+        Total Likes: <%=  @sum %>
+      </div>
+
+      <div>
+        Total Followers: <%=  @userFollow %>
+      </div>
+
+      <div>
+        <% if @user.id != current_user.id %>
+          <% if current_user.following?(@user) %>
+           <%= link_to "Unfollow", Unfollow_user_path(@user), :class => "btn red" %>
+
+          <% else %>
+          <%= link_to "follow",follow_user_path(@user), :class => "btn green" %>
+          <% end %>
+       <% end %>
+      </div>
+     </div>
+   </div>
+</div>
+   <div class="row">
+     <div class="headings" >
+     <h3> Recent Posts </h3>
+   </div>
+   <% @user.posts.limit(10).each do |post| %>
+   <div class="col s12 m6 l4">
+     <div class="card small">
+       <div class="card-image">
+         <%= image_tag post.image.url %>
+         <span class="card-title"><%= post.title %></span>
+       </div>
+       <div class="card-content">
+         <%= post.description %> <br>
+         <%= link_to post.user.email, profile_user_path(post.user.id) %> <br>
+         <div class="like">
+          <i class="tiny material-icons">thumb_up</i><%= post.get_upvotes.size %>
+        </div>
+        <div class="dislike">
+          <i class="tiny material-icons">thumb_down</i><%= post.get_downvotes.size %>
+        </div>
+       </div>
+       <div class="card-action">
+         <%= link_to 'Show', post %>
+       </div>
+     </div>
+   </div>
+  <% end %>
+  </div>
